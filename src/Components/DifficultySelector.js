@@ -1,24 +1,20 @@
-import { useState } from "react";
-
 import Card from "./UI/Card";
 import Button from "./UI/Button";
 
 import styles from "./DifficultySelector.module.css";
 
 const DifficultySelector = (props) => {
-  const [difficulty, setDifficulty] = useState(null);
-
-  const handleClick = (event) => {
-    setDifficulty(event.target.innerText);
-  };
-
   return (
     <Card className={styles.difficulty}>
-      <Button className={styles.easy} onClick={handleClick}>
+      <Button className={styles.easy} onClick={props.onDifficultySelect}>
         Easy
       </Button>
-      <Button className={styles.medium} onClick={handleClick}>Medium</Button>
-      <Button className={styles.hard} onClick={handleClick}>Hard</Button>
+      <Button className={styles.medium} onClick={props.onDifficultySelect}>
+        Medium
+      </Button>
+      <Button className={styles.hard} onClick={props.onDifficultySelect}>
+        Hard
+      </Button>
     </Card>
   );
 };
