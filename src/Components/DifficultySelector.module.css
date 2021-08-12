@@ -1,0 +1,29 @@
+.difficulty {
+  margin: 15px auto;
+  width: 50%;
+  text-align: center;
+  border-width: 5px;
+}
+
+.easy {
+    color: white;
+    background-color: green;
+}
+
+.medium {
+    color: black;
+    background-color: yellow;
+}
+
+.hard {
+    color: white;
+    background-color: red;;
+}
+
+.easy, .medium, .hard {
+    padding: 10%;
+    margin: 5%;
+    font-size: 30px;
+    font-weight: 800;
+    border-width: 5px;
+}

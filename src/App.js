@@ -1,6 +1,12 @@
+import Title from "./Components/Title";
+import DifficultySelector from "./Components/DifficultySelector";
+
 function App() {
   return (
-    <div></div>
+    <>
+    <Title />
+    <DifficultySelector />
+    </>
   );
 }
 
