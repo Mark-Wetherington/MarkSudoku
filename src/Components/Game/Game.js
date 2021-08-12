@@ -4,21 +4,28 @@ import Board from "./Board";
 import Button from "../UI/Button";
 
 const Game = (props) => {
-  const [initialBoard, setInitialBoard] = useState(null);
+  const [initialData, setinitialData] = useState(null);
 
   const requestURL = "new/";
   useEffect(() => {
-    fetch(requestURL)
-      .then((response) => response.json())
-      .then((data) => setInitialBoard(() => {
-        return data.squares;
-      }))
-      .catch((error) => console.log(error));
+    const fetchAPI = async () => {
+      await fetch(requestURL)
+        .then((response) => response.json())
+        .then((data) =>
+          setinitialData(() => {
+            //console.log(data);
+            return data;
+          })
+        )
+        .catch((error) => console.log(error));
+    };
+
+    fetchAPI();
   }, []);
 
   return (
     <>
-      <Board initialBoard={initialBoard}></Board>
+      {initialData && <Board initialData={initialData}></Board>}
       <Button onClick={props.onReset}>Reset</Button>
     </>
   );
