@@ -1,5 +1,5 @@
 {
-  "name": "sudoku",
+  "name": "mark-sudoku",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,6 +10,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "sudoku": "0.0.3",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -38,9 +39,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://www.cs.utep.edu/cheon/ws/sudoku/",
   "devDependencies": {
     "gh-pages": "^3.2.3"
   },
-  "homepage": "http://mark-wetherington.github.io/Sudoku"
+  "homepage": "http://mark-wetherington.github.io/MarkSudoku"
 }
