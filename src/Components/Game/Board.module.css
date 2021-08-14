@@ -1,0 +1,9 @@
+.board {
+    background-color: lightgray;
+    width: 50%;
+    text-align: center;
+}
+
+.board-cell {
+    display: inline-block;
+}

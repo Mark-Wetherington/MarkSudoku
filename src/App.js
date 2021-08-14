@@ -7,12 +7,6 @@ import Game from "./Components/Game/Game";
 function App() {
   const [difficulty, setDifficulty] = useState('');
 
-  const handleDifficultySelect = (event) => {
-    setDifficulty((prevState, props) => {
-      return event.target.innerHTML;
-    })
-  }
-
   const handleReset = (event) => {
     setDifficulty((prevState, props) => {
       return '';
@@ -22,7 +16,7 @@ function App() {
   return (
     <>
     <Title />
-    {!difficulty && <DifficultySelector onDifficultySelect={handleDifficultySelect} />}
+    {!difficulty && <DifficultySelector onDifficultySelect={setDifficulty} />}
     {difficulty && <Game difficulty={difficulty} onReset={handleReset}></Game>}
     </>
   );

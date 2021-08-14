@@ -3,10 +3,14 @@ import Button from "./UI/Button";
 
 import styles from "./DifficultySelector.module.css";
 
-const DifficultySelector = (props) => {
+const DifficultySelector = (props) => {  
+  const DifficultySet = (event) => {
+    props.onDifficultySelect(event.target.innerHTML);
+  }
+
   return (
     <Card className={styles.difficulty}>
-      <Button className={styles.easy} onClick={props.onDifficultySelect}>
+      <Button className={styles.easy} onClick={DifficultySet}>
         Easy
       </Button>
       <Button className={styles.medium} onClick={props.onDifficultySelect}>
