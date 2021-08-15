@@ -16,6 +16,7 @@
   border-style: solid;
   border-width: 1px;
   border-color: black;
+  outline: none;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -28,8 +29,4 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
-}
-
-input:focus {
-  outline: none;
 }
