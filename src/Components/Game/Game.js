@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { makepuzzle, solvepuzzle, ratepuzzle } from "sudoku";
 import Board from "./Board";
 import Button from "../UI/Button";
+import NewCell from "./NewCell";
+import GivenCell from "./GivenCell";
 
 const Game = (props) => {
   let puzzle = makepuzzle();
@@ -18,9 +20,9 @@ const Game = (props) => {
     let puzzleRow = [];
     for (let i = 0; i < puzz.length; i++) {
       if (puzz[i]===null) {
-        puzzleRow.push('_');  
+        puzzleRow.push(<NewCell type={'input'} value={''} />);
       } else {
-        puzzleRow.push(puzz[i]);
+        puzzleRow.push(<NewCell type={'given'} value={puzz[i]} />);
       }
       if (puzzleRow.length === 9) {
         puzzle2D.push(puzzleRow);
