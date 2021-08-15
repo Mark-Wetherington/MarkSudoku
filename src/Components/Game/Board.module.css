@@ -1,7 +1,7 @@
 .board {
-    background-color: lightgray;
-    width: 50%;
+    width: 400px;
     text-align: center;
+    margin: auto;
 }
 
 .board-cell {
