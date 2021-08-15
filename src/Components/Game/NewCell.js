@@ -6,7 +6,6 @@ const NewCell = (props) => {
 
   const blockInvalid = (event) => {
     const blockedKeys = ['e','+','-','0'];
-    console.log(event.key);
     if (blockedKeys.includes(event.key) || event.target.value) {
       event.preventDefault();
     }
