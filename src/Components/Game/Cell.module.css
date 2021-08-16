@@ -2,11 +2,11 @@
 
 }
 
-.given {
+.given, .given-bottom, .given-right, .given-bottom-right {
   background-color: lightgray;
 }
 
-.input, .given, .input-bottom, .given-bottom, .input-bottom-right, .given-bottom-right {
+.input, .given, .input-bottom, .given-bottom, .input-right, .given-right, .input-bottom-right, .given-bottom-right {
   width: 50px;
   height: 50px;
   padding: 0;
@@ -18,9 +18,19 @@
   outline: none;
 }
 
-.input, .given, .input-bottom, .given-bottom {
+.input, .given {
   border-bottom: none;
   border-right: none;
+}
+
+.input-bottom, .given-bottom {
+  border-bottom: 2px solid black;
+  border-right: none;
+}
+
+.input-right, .given-right {
+  border-right: 2px solid black;
+  border-bottom: none;
 }
 
 .input-bottom-right, .given-bottom-right {

@@ -27,11 +27,10 @@ const Game = (props) => {
       if (i > 71) {
         border = "-bottom";
       }
-      if (i % 8 === 0) {
-        border.concat("-right");
+      if ((i+1) % 9 === 0) {
+        border = border.concat("-right");
       }
       if (puzz[i] === null) {
-        console.log("input" + border);
         puzzleRow.push(<NewCell type={"input" + border} value={""} key={i} />);
       } else {
         puzzleRow.push(
