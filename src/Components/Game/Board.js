@@ -9,14 +9,8 @@ const Board = (props) => {
     <>
       {true && (
         <Card className={styles.board}>
-            {props.puzzle.map((row, i) => (
-              <div key={`row-${i}`}>
-                {row.map((cell, j) => (
-                  <div className={styles['board-cell']} key={`cell-${i}-${j}`}>
-                    {cell}
-                  </div>
-                ))}
-              </div>
+            {props.puzzle.map((cell, i) => (
+                    cell
             ))}
         </Card>
       )}

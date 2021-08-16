@@ -15,26 +15,21 @@ const Game = (props) => {
     difficulty: ratepuzzle(puzzle, 4),
   };
 
-  const ConvertPuzzleTo2D = (puzz) => {
-    let puzzle2D = [];
-    let puzzleRow = [];
+  const PuzzleRenderer = (puzz) => {
+    let puzzleRendering = [];
     for (let i = 0; i < puzz.length; i++) {
       if (puzz[i]===null) {
-        puzzleRow.push(<NewCell type={'input'} value={''} />);
+        puzzleRendering.push(<NewCell type={'input'} value={''} key={i} />);
       } else {
-        puzzleRow.push(<NewCell type={'given'} value={puzz[i]} />);
-      }
-      if (puzzleRow.length === 9) {
-        puzzle2D.push(puzzleRow);
-        puzzleRow = [];
+        puzzleRendering.push(<NewCell type={'given'} value={puzz[i]} key={i} />);
       }
     }
-    return puzzle2D;
+    return puzzleRendering;
   };
 
   return (
     <>
-      <Board puzzle={ConvertPuzzleTo2D(puzzle)}></Board>
+      <Board puzzle={PuzzleRenderer(puzzle)}></Board>
       <Button onClick={props.onReset}>Reset</Button>
     </>
   );
