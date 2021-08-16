@@ -1,22 +1,31 @@
-.input-cell {
+.input {
 
 }
 
-.given-cell {
+.given {
   background-color: lightgray;
 }
 
-.input-cell, .given-cell {
-  width: 40px;
-  height: 40px;
+.input, .given, .input-bottom, .given-bottom, .input-bottom-right, .given-bottom-right {
+  width: 50px;
+  height: 50px;
   padding: 0;
   margin: 0;
-  font-size: 30px;
+  font-size: 38px;
   text-align: center;
-  border-style: solid;
-  border-width: 1px;
-  border-color: black;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
   outline: none;
+}
+
+.input, .given, .input-bottom, .given-bottom {
+  border-bottom: none;
+  border-right: none;
+}
+
+.input-bottom-right, .given-bottom-right {
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
 }
 
 /* Chrome, Safari, Edge, Opera */

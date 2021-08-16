@@ -7,29 +7,48 @@ import NewCell from "./NewCell";
 import GivenCell from "./GivenCell";
 
 const Game = (props) => {
-  let puzzle = makepuzzle();
+  const [puzzle, setPuzzle] = useState([]);
 
-  let puzzleData = {
-    puzzle,
-    solution: solvepuzzle(puzzle),
-    difficulty: ratepuzzle(puzzle, 4),
-  };
+  //setPuzzle(makepuzzle());
+  // let puzzleData = {
+  //   puzzle,
+  //   solution: solvepuzzle(puzzle),
+  //   difficulty: ratepuzzle(puzzle, 4),
+  // };
+  useEffect(() => {
+    setPuzzle(makepuzzle());
+  }, []);
 
-  const PuzzleRenderer = (puzz) => {
-    let puzzleRendering = [];
+  const ConvertPuzzleTo2D = (puzz) => {
+    let puzzle2D = [];
+    let puzzleRow = [];
     for (let i = 0; i < puzz.length; i++) {
-      if (puzz[i]===null) {
-        puzzleRendering.push(<NewCell type={'input'} value={''} key={i} />);
+      let border = "";
+      if (i > 71) {
+        border = "-bottom";
+      }
+      if (i % 8 === 0) {
+        border.concat("-right");
+      }
+      if (puzz[i] === null) {
+        console.log("input" + border);
+        puzzleRow.push(<NewCell type={"input" + border} value={""} key={i} />);
       } else {
-        puzzleRendering.push(<NewCell type={'given'} value={puzz[i]} key={i} />);
+        puzzleRow.push(
+          <NewCell type={"given" + border} value={puzz[i] + 1} key={i} />
+        );
+      }
+      if (puzzleRow.length === 9) {
+        puzzle2D.push(puzzleRow);
+        puzzleRow = [];
       }
     }
-    return puzzleRendering;
+    return puzzle2D;
   };
 
   return (
     <>
-      <Board puzzle={PuzzleRenderer(puzzle)}></Board>
+      <Board puzzle={ConvertPuzzleTo2D(puzzle)}></Board>
       <Button onClick={props.onReset}>Reset</Button>
     </>
   );

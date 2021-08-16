@@ -4,13 +4,17 @@ import Card from '../UI/Card'
 
 import styles from './Board.module.css'
 
-const Board = (props) => {  
+const Board = (props) => {
   return (
     <>
       {true && (
         <Card className={styles.board}>
-            {props.puzzle.map((cell, i) => (
+            {props.puzzle.map((row, i) => (
+              <div className={styles.row} key={`row-${i}`}>
+                {row.map((cell) => (
                     cell
+                ))}
+              </div>
             ))}
         </Card>
       )}

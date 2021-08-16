@@ -1,9 +1,11 @@
 .board {
-    width: 400px;
-    text-align: center;
-    margin: auto;
+  width: fit-content;
+  height: fit-content;
+  text-align: center;
+  margin: auto;
+  padding: 10px;
 }
 
-.board-cell {
-    display: inline-block;
+.row {
+  width: fit-content;
 }

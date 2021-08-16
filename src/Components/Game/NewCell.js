@@ -10,13 +10,13 @@ const NewCell = (props) => {
       event.preventDefault();
     }
   };
-
+  
   return (
     <input
       type="number"
       defaultValue={props.value}
       readOnly={givenCheck}
-      className={styles[`${props.type}-cell`]}
+      className={styles[`${props.type}`]}
       onKeyDown={blockInvalid}
       onPaste={(e)=>e.preventDefault()}
     />
