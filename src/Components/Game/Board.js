@@ -8,7 +8,8 @@ const Board = (props) => {
   return (
     <>
       {true && (
-        <Card className={styles.board}>
+        <div className={styles.container}>
+          <Card className={styles.board}>
             {props.puzzle.map((row, i) => (
               <div className={styles.row} key={`row-${i}`}>
                 {row.map((cell) => (
@@ -16,7 +17,8 @@ const Board = (props) => {
                 ))}
               </div>
             ))}
-        </Card>
+            </Card>
+        </div>
       )}
     </>
   );

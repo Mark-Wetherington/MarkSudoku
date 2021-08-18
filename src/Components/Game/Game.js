@@ -9,6 +9,7 @@ import Cell from "./Cell";
 const Game = (props) => {
   const [puzzle, setPuzzle] = useState([]);
   const [difficulty, setDifficulty] = useState("");
+  const [puzzleJSX, setPuzzleJSX] = useState([]);
 
   const handleReset = (event) => {
     setDifficulty((prevState, props) => {
@@ -17,12 +18,37 @@ const Game = (props) => {
   };
 
   useEffect(() => {
-    setPuzzle(makepuzzle());
-//    while (ratepuzzle(puzzle, 4000));
-  }, []);
+    if (!difficulty) {
+      setPuzzle(makepuzzle());
+      return;
+    }
+    let check = false;
+    while (check === false) {
+      let difficultyRating = ratepuzzle(puzzle, 400);
+      console.log(check);
+      console.log(difficultyRating);
+      console.log(difficulty);
+      if (difficultyRating < 0.85 && difficulty === "Easy") {
+        check = true;
+        setPuzzleJSX(BuildPuzzle(puzzle));
+        console.log(check);
+      } else if (difficultyRating < 2 && difficulty === "Medium") {
+        check = true;
+        setPuzzleJSX(BuildPuzzle(puzzle));
+        console.log(check);
+      } else if (difficulty === "Hard") {
+        check = true;
+        setPuzzleJSX(BuildPuzzle(puzzle));
+        console.log(check);
+      } else {
+        console.log(check);
+        setPuzzle(makepuzzle());
+      }
+    }
+  }, [difficulty]); // Should only include difficulty, despite ESLint
 
-  const ConvertPuzzleTo2D = (puzz) => {
-    let puzzle2D = [];
+  const BuildPuzzle = (puzz) => {
+    let puzzleJSX = [];
     let puzzleRow = [];
     for (let i = 0; i < puzz.length; i++) {
       let classes = ["cell"];
@@ -35,22 +61,23 @@ const Game = (props) => {
       if (puzz[i] === null) {
         puzzleRow.push(<Cell classList={classes} value={""} key={i} />);
       } else {
+        classes.push("given");
         puzzleRow.push(
           <Cell classList={classes} value={puzz[i] + 1} key={i} />
         );
       }
       if (puzzleRow.length === 9) {
-        puzzle2D.push(puzzleRow);
+        puzzleJSX.push(puzzleRow);
         puzzleRow = [];
       }
     }
-    return puzzle2D;
+    return puzzleJSX;
   };
 
   return (
     <>
       {!difficulty && <DifficultySelector onDifficultySelect={setDifficulty} />}
-      {difficulty && <Board puzzle={ConvertPuzzleTo2D(puzzle)}></Board>}
+      {difficulty && <Board puzzle={puzzleJSX}></Board>}
       {difficulty && <Button onClick={handleReset}>Reset</Button>}
     </>
   );
