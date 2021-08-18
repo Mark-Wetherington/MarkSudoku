@@ -1,11 +1,10 @@
 import styles from "./Cell.module.css";
 
-const NewCell = (props) => {
+const Cell = (props) => {
   const givenCheck = props.value ? true : false;
-  const regex = /[^\d]/g;
 
   const blockInvalid = (event) => {
-    const blockedKeys = ['e','+','-','0'];
+    const blockedKeys = ['e','+','-','0','.'];
     if (blockedKeys.includes(event.key) || event.target.value) {
       event.preventDefault();
     }
@@ -16,11 +15,11 @@ const NewCell = (props) => {
       type="number"
       defaultValue={props.value}
       readOnly={givenCheck}
-      className={styles[`${props.type}`]}
+      className={props.classList.map((thisClass) => styles[`${thisClass}`]).join(' ')}
       onKeyDown={blockInvalid}
       onPaste={(e)=>e.preventDefault()}
     />
   );
 };
 
-export default NewCell;
+export default Cell;

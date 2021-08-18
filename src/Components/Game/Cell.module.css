@@ -1,12 +1,4 @@
-.input {
-
-}
-
-.given, .given-bottom, .given-right, .given-bottom-right {
-  background-color: lightgray;
-}
-
-.input, .given, .input-bottom, .given-bottom, .input-right, .given-right, .input-bottom-right, .given-bottom-right {
+.cell {
   width: 50px;
   height: 50px;
   padding: 0;
@@ -16,25 +8,19 @@
   border-top: 2px solid black;
   border-left: 2px solid black;
   outline: none;
-}
-
-.input, .given {
   border-bottom: none;
   border-right: none;
 }
 
-.input-bottom, .given-bottom {
-  border-bottom: 2px solid black;
-  border-right: none;
+.given {
+  background-color: lightgray;
 }
 
-.input-right, .given-right {
-  border-right: 2px solid black;
-  border-bottom: none;
+.bottom {
+  border-bottom: 2px solid black;
 }
 
-.input-bottom-right, .given-bottom-right {
-  border-bottom: 2px solid black;
+.right {
   border-right: 2px solid black;
 }
 
