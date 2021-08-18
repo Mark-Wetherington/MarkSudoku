@@ -1,5 +1,5 @@
-import Card from "./UI/Card";
-import Button from "./UI/Button";
+import Card from "../UI/Card";
+import Button from "../UI/Button";
 
 import styles from "./DifficultySelector.module.css";
 
@@ -13,10 +13,10 @@ const DifficultySelector = (props) => {
       <Button className={styles.easy} onClick={DifficultySet}>
         Easy
       </Button>
-      <Button className={styles.medium} onClick={props.onDifficultySelect}>
+      <Button className={styles.medium} onClick={DifficultySet}>
         Medium
       </Button>
-      <Button className={styles.hard} onClick={props.onDifficultySelect}>
+      <Button className={styles.hard} onClick={DifficultySet}>
         Hard
       </Button>
     </Card>
