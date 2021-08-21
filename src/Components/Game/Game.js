@@ -6,49 +6,38 @@ import Board from "./Board";
 import Button from "../UI/Button";
 import Cell from "./Cell";
 
+const DIFFICULTY_RATING = {
+  Easy: 0.85,
+  Medium: 2,
+  Hard: Infinity,
+};
+
 const Game = (props) => {
-  const [puzzle, setPuzzle] = useState([]);
   const [difficulty, setDifficulty] = useState("");
   const [puzzleJSX, setPuzzleJSX] = useState([]);
 
   const handleReset = (event) => {
-    setDifficulty((prevState, props) => {
-      return "";
-    });
+    setDifficulty("");
+    setPuzzleJSX([]);
   };
 
   useEffect(() => {
     if (!difficulty) {
-      setPuzzle(makepuzzle());
       return;
     }
-    let check = false;
-    while (check === false) {
-      let difficultyRating = ratepuzzle(puzzle, 400);
-      console.log(check);
-      console.log(difficultyRating);
-      console.log(difficulty);
-      if (difficultyRating < 0.85 && difficulty === "Easy") {
-        check = true;
-        setPuzzleJSX(BuildPuzzle(puzzle));
-        console.log(check);
-      } else if (difficultyRating < 2 && difficulty === "Medium") {
-        check = true;
-        setPuzzleJSX(BuildPuzzle(puzzle));
-        console.log(check);
-      } else if (difficulty === "Hard") {
-        check = true;
-        setPuzzleJSX(BuildPuzzle(puzzle));
-        console.log(check);
-      } else {
-        console.log(check);
-        setPuzzle(makepuzzle());
-      }
-    }
-  }, [difficulty]); // Should only include difficulty, despite ESLint
+    let candidatePuzzle = [];
+    let candidateRating = 0;
+
+    do {
+      candidatePuzzle = makepuzzle();
+      candidateRating = ratepuzzle(candidatePuzzle, 20);
+    } while (candidateRating >= DIFFICULTY_RATING[difficulty]);
+
+    setPuzzleJSX(BuildPuzzle(candidatePuzzle));
+  }, [difficulty]);
 
   const BuildPuzzle = (puzz) => {
-    let puzzleJSX = [];
+    let JSXAccumulator = [];
     let puzzleRow = [];
     for (let i = 0; i < puzz.length; i++) {
       let classes = ["cell"];
@@ -67,11 +56,11 @@ const Game = (props) => {
         );
       }
       if (puzzleRow.length === 9) {
-        puzzleJSX.push(puzzleRow);
+        JSXAccumulator.push(puzzleRow);
         puzzleRow = [];
       }
     }
-    return puzzleJSX;
+    return JSXAccumulator;
   };
 
   return (
