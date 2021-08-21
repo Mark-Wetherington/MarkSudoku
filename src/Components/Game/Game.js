@@ -6,23 +6,38 @@ import Board from "./Board";
 import Button from "../UI/Button";
 import Cell from "./Cell";
 
+const DIFFICULTY_RATING = {
+  Easy: 0.85,
+  Medium: 2,
+  Hard: Infinity,
+};
+
 const Game = (props) => {
-  const [puzzle, setPuzzle] = useState([]);
   const [difficulty, setDifficulty] = useState("");
+  const [puzzleJSX, setPuzzleJSX] = useState([]);
 
   const handleReset = (event) => {
-    setDifficulty((prevState, props) => {
-      return "";
-    });
+    setDifficulty("");
+    setPuzzleJSX([]);
   };
 
   useEffect(() => {
-    setPuzzle(makepuzzle());
-//    while (ratepuzzle(puzzle, 4000));
-  }, []);
+    if (!difficulty) {
+      return;
+    }
+    let candidatePuzzle = [];
+    let candidateRating = 0;
 
-  const ConvertPuzzleTo2D = (puzz) => {
-    let puzzle2D = [];
+    do {
+      candidatePuzzle = makepuzzle();
+      candidateRating = ratepuzzle(candidatePuzzle, 20);
+    } while (candidateRating >= DIFFICULTY_RATING[difficulty]);
+
+    setPuzzleJSX(BuildPuzzle(candidatePuzzle));
+  }, [difficulty]);
+
+  const BuildPuzzle = (puzz) => {
+    let JSXAccumulator = [];
     let puzzleRow = [];
     for (let i = 0; i < puzz.length; i++) {
       let classes = ["cell"];
@@ -35,22 +50,23 @@ const Game = (props) => {
       if (puzz[i] === null) {
         puzzleRow.push(<Cell classList={classes} value={""} key={i} />);
       } else {
+        classes.push("given");
         puzzleRow.push(
           <Cell classList={classes} value={puzz[i] + 1} key={i} />
         );
       }
       if (puzzleRow.length === 9) {
-        puzzle2D.push(puzzleRow);
+        JSXAccumulator.push(puzzleRow);
         puzzleRow = [];
       }
     }
-    return puzzle2D;
+    return JSXAccumulator;
   };
 
   return (
     <>
       {!difficulty && <DifficultySelector onDifficultySelect={setDifficulty} />}
-      {difficulty && <Board puzzle={ConvertPuzzleTo2D(puzzle)}></Board>}
+      {difficulty && <Board puzzle={puzzleJSX}></Board>}
       {difficulty && <Button onClick={handleReset}>Reset</Button>}
     </>
   );
