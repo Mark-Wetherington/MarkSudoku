@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
+import Card from "../UI/Card";
 
-import Card from '../UI/Card'
-
-import styles from './Board.module.css'
+import styles from "./Board.module.css";
 
 const Board = (props) => {
   return (
@@ -12,12 +10,10 @@ const Board = (props) => {
           <Card className={styles.board}>
             {props.puzzle.map((row, i) => (
               <div className={styles.row} key={`row-${i}`}>
-                {row.map((cell) => (
-                    cell
-                ))}
+                {row.map((cell) => cell)}
               </div>
             ))}
-            </Card>
+          </Card>
         </div>
       )}
     </>
