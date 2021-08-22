@@ -7,6 +7,7 @@ import Button from "../UI/Button";
 import Card from "../UI/Card";
 
 import styles from "./Game.module.css";
+import { floor } from "lodash";
 
 const DIFFICULTY_RATING = {
   Easy: 0.85,
@@ -66,11 +67,26 @@ const Game = (props) => {
     let puzzleRow = [];
     for (let i = 0; i < puzz.length; i++) {
       let classes = ["cell"];
-      if (i > 71) {
-        classes.push("bottom");
+      if (i % 9 === 0 || i % 9 === 3 || i % 9 === 6) {
+        classes.push("block-left");
       }
-      if ((i + 1) % 9 === 0) {
-        classes.push("right");
+      if (i % 9 === 8) {
+        classes.push("block-right");
+      }
+      if (floor(i / 9) === 0) {
+        classes.push("block-top");
+      }
+      if (floor(i / 9) === 3) {
+        classes.push("block-top");
+      }
+      if (floor(i / 9) === 6) {
+        classes.push("block-top");
+      }
+      if (floor(i / 9) === 8) {
+        classes.push("block-bottom");
+      }
+      if (i % 9 === 8) {
+        classes.push("block-right");
       }
       if (puzz[i] === null) {
         puzzleRow.push(<Cell classList={classes} value={""} key={i} />);

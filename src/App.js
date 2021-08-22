@@ -14,4 +14,6 @@ export default App;
 
 /* To Do:
 Add block css
+Make it look nice
+Add submission and reset modals
 */
