@@ -20,7 +20,7 @@ const Game = (props) => {
   const handleSubmit = (event) => {
     let solutionAttempt = document.getElementsByName("sudoku-cell");
     for (let i = 0; i < solution.length; i++) {
-      if (solution[i] !== solutionAttempt[i].value) {
+      if (solution[i].toString() !== solutionAttempt[i].value) {
         console.log("Incorrect solution");
         return;
       }
