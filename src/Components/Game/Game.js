@@ -73,16 +73,16 @@ const Game = (props) => {
       if (i % 9 === 8) {
         classes.push("block-right");
       }
-      if (floor(i / 9) === 0) {
+      if (Math.floor(i / 9) === 0) {
         classes.push("block-top");
       }
-      if (floor(i / 9) === 3) {
+      if (Math.floor(i / 9) === 3) {
         classes.push("block-top");
       }
-      if (floor(i / 9) === 6) {
+      if (Math.floor(i / 9) === 6) {
         classes.push("block-top");
       }
-      if (floor(i / 9) === 8) {
+      if (Math.floor(i / 9) === 8) {
         classes.push("block-bottom");
       }
       if (i % 9 === 8) {
