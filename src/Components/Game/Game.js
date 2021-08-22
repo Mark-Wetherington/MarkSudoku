@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 
 import { makepuzzle, solvepuzzle, ratepuzzle } from "sudoku";
 import DifficultySelector from "./DifficultySelector";
-import Board from "./Board";
-import Button from "../UI/Button";
 import Cell from "./Cell";
+import Button from "../UI/Button";
+import Card from "../UI/Card";
+
+import styles from "./Game.module.css";
 
 const DIFFICULTY_RATING = {
   Easy: 0.85,
@@ -91,7 +93,17 @@ const Game = (props) => {
       {!difficulty && <DifficultySelector onDifficultySelect={setDifficulty} />}
       {difficulty && (
         <>
-          <Board puzzle={puzzleJSX}></Board>
+          {true && (
+            <div className={styles.container}>
+              <Card className={styles.board}>
+                {puzzleJSX.map((row, i) => (
+                  <div className={styles.row} key={`row-${i}`}>
+                    {row.map((cell) => cell)}
+                  </div>
+                ))}
+              </Card>
+            </div>
+          )}
           <Button onClick={handleSubmit}>Submit</Button>
           <Button onClick={handleHint}>Hint</Button>
           <Button onClick={handleReset}>Reset</Button>
