@@ -93,7 +93,7 @@ const Game = (props) => {
       {!difficulty && <DifficultySelector onDifficultySelect={setDifficulty} />}
       {difficulty && (
         <>
-          {true && (
+          {
             <div className={styles.container}>
               <Card className={styles.board}>
                 {puzzleJSX.map((row, i) => (
@@ -103,7 +103,7 @@ const Game = (props) => {
                 ))}
               </Card>
             </div>
-          )}
+          }
           <Button onClick={handleSubmit}>Submit</Button>
           <Button onClick={handleHint}>Hint</Button>
           <Button onClick={handleReset}>Reset</Button>
