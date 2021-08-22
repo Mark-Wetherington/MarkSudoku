@@ -13,8 +13,20 @@ const DIFFICULTY_RATING = {
 };
 
 const Game = (props) => {
+  const [solution, setSolution] = useState([]);
   const [difficulty, setDifficulty] = useState("");
   const [puzzleJSX, setPuzzleJSX] = useState([]);
+
+  const handleSubmit = (event) => {
+    let solutionAttempt = document.getElementsByName("sudoku-cell");
+    for (let i = 0; i < solution.length; i++) {
+      if (solution[i] !== solutionAttempt[i].value - 1) {
+        console.log("Incorrect solution");
+        return;
+      }
+    }
+    console.log("Correct solution");
+  };
 
   const handleReset = (event) => {
     setDifficulty("");
@@ -33,6 +45,7 @@ const Game = (props) => {
       candidateRating = ratepuzzle(candidatePuzzle, 20);
     } while (candidateRating >= DIFFICULTY_RATING[difficulty]);
 
+    setSolution(solvepuzzle(candidatePuzzle));
     setPuzzleJSX(BuildPuzzle(candidatePuzzle));
   }, [difficulty]);
 
@@ -67,6 +80,7 @@ const Game = (props) => {
     <>
       {!difficulty && <DifficultySelector onDifficultySelect={setDifficulty} />}
       {difficulty && <Board puzzle={puzzleJSX}></Board>}
+      {difficulty && <Button onClick={handleSubmit}>Submit</Button>}
       {difficulty && <Button onClick={handleReset}>Reset</Button>}
     </>
   );
