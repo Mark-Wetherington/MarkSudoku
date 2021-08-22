@@ -20,12 +20,22 @@ const Game = (props) => {
   const handleSubmit = (event) => {
     let solutionAttempt = document.getElementsByName("sudoku-cell");
     for (let i = 0; i < solution.length; i++) {
-      if (solution[i] !== solutionAttempt[i].value - 1) {
+      if (solution[i] !== solutionAttempt[i].value) {
         console.log("Incorrect solution");
         return;
       }
     }
     console.log("Correct solution");
+  };
+
+  const handleHint = () => {
+    let solutionAttempt = document.getElementsByName("sudoku-cell");
+    for (let i = 0; i < solution.length; i++) {
+      if (solutionAttempt[i].value !== solution[i].toString()) {
+        solutionAttempt[i].value = solution[i];
+        return;
+      }
+    }
   };
 
   const handleReset = (event) => {
@@ -45,7 +55,7 @@ const Game = (props) => {
       candidateRating = ratepuzzle(candidatePuzzle, 20);
     } while (candidateRating >= DIFFICULTY_RATING[difficulty]);
 
-    setSolution(solvepuzzle(candidatePuzzle));
+    setSolution(solvepuzzle(candidatePuzzle).map((x) => x + 1));
     setPuzzleJSX(BuildPuzzle(candidatePuzzle));
   }, [difficulty]);
 
@@ -79,9 +89,14 @@ const Game = (props) => {
   return (
     <>
       {!difficulty && <DifficultySelector onDifficultySelect={setDifficulty} />}
-      {difficulty && <Board puzzle={puzzleJSX}></Board>}
-      {difficulty && <Button onClick={handleSubmit}>Submit</Button>}
-      {difficulty && <Button onClick={handleReset}>Reset</Button>}
+      {difficulty && (
+        <>
+          <Board puzzle={puzzleJSX}></Board>
+          <Button onClick={handleSubmit}>Submit</Button>
+          <Button onClick={handleHint}>Hint</Button>
+          <Button onClick={handleReset}>Reset</Button>
+        </>
+      )}
     </>
   );
 };
