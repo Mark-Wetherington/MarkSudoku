@@ -17,31 +17,18 @@
   cursor: default;
 }
 
-.inner {
-  border-top: 2px solid black;
-  border-left: 2px solid black;
+input:nth-child(1) {
+  border-left: 5px solid black;
 }
 
-.bottom {
-  border-bottom: 2px solid black;
-}
-
-.right {
-  border-right: 2px solid black;
-}
-
-.block-top {
-  border-top: 5px solid black;
-}
-
-.block-right {
+input:nth-child(3n) {
   border-right: 5px solid black;
 }
 
-.block-bottom {
+:nth-child(3n) > input:nth-child(n) {
   border-bottom: 5px solid black;
 }
 
-.block-left {
-  border-left: 5px solid black;
+:nth-child(1) > input:nth-child(n) {
+  border-top: 5px solid black;
 }

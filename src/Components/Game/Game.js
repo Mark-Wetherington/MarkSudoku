@@ -7,7 +7,6 @@ import Button from "../UI/Button";
 import Card from "../UI/Card";
 
 import styles from "./Game.module.css";
-import { floor } from "lodash";
 
 const DIFFICULTY_RATING = {
   Easy: 0.85,
@@ -67,27 +66,6 @@ const Game = (props) => {
     let puzzleRow = [];
     for (let i = 0; i < puzz.length; i++) {
       let classes = ["cell"];
-      if (i % 9 === 0 || i % 9 === 3 || i % 9 === 6) {
-        classes.push("block-left");
-      }
-      if (i % 9 === 8) {
-        classes.push("block-right");
-      }
-      if (Math.floor(i / 9) === 0) {
-        classes.push("block-top");
-      }
-      if (Math.floor(i / 9) === 3) {
-        classes.push("block-top");
-      }
-      if (Math.floor(i / 9) === 6) {
-        classes.push("block-top");
-      }
-      if (Math.floor(i / 9) === 8) {
-        classes.push("block-bottom");
-      }
-      if (i % 9 === 8) {
-        classes.push("block-right");
-      }
       if (puzz[i] === null) {
         puzzleRow.push(<Cell classList={classes} value={""} key={i} />);
       } else {
@@ -113,9 +91,7 @@ const Game = (props) => {
             <div className={styles.container}>
               <Card className={styles.board}>
                 {puzzleJSX.map((row, i) => (
-                  <div className={styles.row} key={`row-${i}`}>
-                    {row.map((cell) => cell)}
-                  </div>
+                  <div key={`row-${i}`}>{row.map((cell) => cell)}</div>
                 ))}
               </Card>
             </div>
