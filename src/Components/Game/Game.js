@@ -18,8 +18,10 @@ const Game = (props) => {
   const [solution, setSolution] = useState([]);
   const [difficulty, setDifficulty] = useState("");
   const [puzzleJSX, setPuzzleJSX] = useState([]);
+  const [attempt, setAttempt] = useState([]);
 
   const handleSubmit = (event) => {
+    console.log(attempt);
     let solutionAttempt = document.getElementsByName("sudoku-cell");
     for (let i = 0; i < solution.length; i++) {
       if (solution[i].toString() !== solutionAttempt[i].value) {
@@ -31,6 +33,7 @@ const Game = (props) => {
   };
 
   const handleHint = () => {
+    console.log(attempt);
     let solutionAttempt = document.getElementsByName("sudoku-cell");
     for (let i = 0; i < solution.length; i++) {
       if (solutionAttempt[i].value !== solution[i].toString()) {
@@ -45,6 +48,15 @@ const Game = (props) => {
     setPuzzleJSX([]);
   };
 
+  const handleAttempt = (idx, value) => {
+    console.log(idx, value);
+    console.log(attempt);
+    //let newAttempt = attempt;
+    //newAttempt[idx] = value;
+    //console.log(newAttempt);
+    //setAttempt(newAttempt);
+  };
+
   useEffect(() => {
     if (!difficulty) {
       return;
@@ -57,6 +69,7 @@ const Game = (props) => {
       candidateRating = ratepuzzle(candidatePuzzle, 20);
     } while (candidateRating >= DIFFICULTY_RATING[difficulty]);
 
+    setAttempt(candidatePuzzle.map((x) => (x !== null ? x + 1 : null)));
     setSolution(solvepuzzle(candidatePuzzle).map((x) => x + 1));
     setPuzzleJSX(BuildPuzzle(candidatePuzzle));
   }, [difficulty]);
@@ -67,11 +80,25 @@ const Game = (props) => {
     for (let i = 0; i < puzz.length; i++) {
       let classes = ["cell"];
       if (puzz[i] === null) {
-        puzzleRow.push(<Cell classList={classes} value={""} key={i} />);
+        puzzleRow.push(
+          <Cell
+            classList={classes}
+            value={""}
+            key={i}
+            index={i}
+            onAttempt={handleAttempt}
+          />
+        );
       } else {
         classes.push("given");
         puzzleRow.push(
-          <Cell classList={classes} value={puzz[i] + 1} key={i} />
+          <Cell
+            classList={classes}
+            value={puzz[i] + 1}
+            key={i}
+            index={i}
+            onAttempt={handleAttempt}
+          />
         );
       }
       if (puzzleRow.length === 9) {

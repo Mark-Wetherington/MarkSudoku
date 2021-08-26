@@ -24,6 +24,7 @@ const Cell = (props) => {
         .join(" ")}
       onKeyDown={blockInvalid}
       onPaste={(e) => e.preventDefault()}
+      onChange={(e) => props.onAttempt(props.index, e.target.value)}
     />
   );
 };
