@@ -8,3 +8,27 @@
   text-align: center;
   padding: 10px;
 }
+
+.board > div > input:nth-child(1) {
+  border-left: 5px solid black;
+}
+
+.board > div > :nth-child(3n) {
+  border-right: 5px solid black;
+}
+
+.board > div > input:nth-child(3n + 4) {
+  border-left: none;
+}
+
+.board > div:nth-child(3n) > input:nth-child(n) {
+  border-bottom: 5px solid black;
+}
+
+.board > div:nth-child(3n + 1) > input:nth-child(n) {
+  border-top: none;
+}
+
+.board > div:nth-child(1) > input:nth-child(n) {
+  border-top: 5px solid black;
+}

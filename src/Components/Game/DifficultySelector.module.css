@@ -6,24 +6,25 @@
 }
 
 .easy {
-    color: white;
-    background-color: green;
+  color: white;
+  background-color: green;
 }
 
 .medium {
-    color: black;
-    background-color: yellow;
+  color: black;
+  background-color: yellow;
 }
 
 .hard {
-    color: white;
-    background-color: red;;
+  color: white;
+  background-color: red;
 }
 
-.easy, .medium, .hard {
-    padding: 10%;
-    margin: 5%;
-    font-size: 30px;
-    font-weight: 800;
-    border-width: 5px;
+.easy,
+.medium,
+.hard {
+  padding: 10%;
+  margin: 5%;
+  font-size: 30px;
+  font-weight: 800;
 }
