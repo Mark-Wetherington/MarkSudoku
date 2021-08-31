@@ -10,6 +10,12 @@ const Cell = (props) => {
       event.preventDefault();
     }
   };
+  let classList = ["cell"];
+  let initialValue = props.initialValue;
+  if (props.initialValue !== null) {
+    classList.push("given");
+    initialValue++;
+  }
 
   return (
     <input
@@ -17,14 +23,15 @@ const Cell = (props) => {
       name="sudoku-cell"
       pattern="[1-9]"
       maxLength="1"
-      defaultValue={props.value}
+      defaultValue={initialValue}
       readOnly={givenCheck}
-      className={props.classList
-        .map((thisClass) => styles[`${thisClass}`])
-        .join(" ")}
+      className={classList.map((thisClass) => styles[`${thisClass}`]).join(" ")}
       onKeyDown={blockInvalid}
       onPaste={(e) => e.preventDefault()}
-      onChange={(e) => props.onAttempt(props.index, e.target.value)}
+      onChange={(e) => {
+        console.log(props.idx, e.target.value);
+        props.onChange(props.idx, e.target.value);
+      }}
     />
   );
 };

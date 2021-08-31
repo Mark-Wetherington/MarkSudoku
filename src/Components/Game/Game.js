@@ -34,6 +34,7 @@ const Game = (props) => {
 
   const handleHint = () => {
     console.log(attempt);
+    handleAttempt(1, 23);
     let solutionAttempt = document.getElementsByName("sudoku-cell");
     for (let i = 0; i < solution.length; i++) {
       if (solutionAttempt[i].value !== solution[i].toString()) {
@@ -51,10 +52,10 @@ const Game = (props) => {
   const handleAttempt = (idx, value) => {
     console.log(idx, value);
     console.log(attempt);
-    //let newAttempt = attempt;
-    //newAttempt[idx] = value;
-    //console.log(newAttempt);
-    //setAttempt(newAttempt);
+    let newAttempt = [...attempt];
+    newAttempt[idx] = value;
+    console.log(newAttempt);
+    setAttempt(newAttempt);
   };
 
   useEffect(() => {
@@ -78,29 +79,9 @@ const Game = (props) => {
     let JSXAccumulator = [];
     let puzzleRow = [];
     for (let i = 0; i < puzz.length; i++) {
-      let classes = ["cell"];
-      if (puzz[i] === null) {
-        puzzleRow.push(
-          <Cell
-            classList={classes}
-            value={""}
-            key={i}
-            index={i}
-            onAttempt={handleAttempt}
-          />
-        );
-      } else {
-        classes.push("given");
-        puzzleRow.push(
-          <Cell
-            classList={classes}
-            value={puzz[i] + 1}
-            key={i}
-            index={i}
-            onAttempt={handleAttempt}
-          />
-        );
-      }
+      puzzleRow.push(
+        <Cell key={i} idx={i} initialValue={puzz[i]} onChange={handleAttempt} />
+      );
       if (puzzleRow.length === 9) {
         JSXAccumulator.push(puzzleRow);
         puzzleRow = [];
@@ -126,6 +107,14 @@ const Game = (props) => {
           <Button onClick={handleSubmit}>Submit</Button>
           <Button onClick={handleHint}>Hint</Button>
           <Button onClick={handleReset}>Reset</Button>
+
+          <Button
+            onClick={(e) => {
+              handleAttempt(88, "hi");
+            }}
+          >
+            attempt
+          </Button>
         </>
       )}
     </>
