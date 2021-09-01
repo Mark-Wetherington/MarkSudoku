@@ -101,14 +101,6 @@ const Game = (props) => {
           <Button onClick={handleSubmit}>Submit</Button>
           <Button onClick={handleHint}>Hint</Button>
           <Button onClick={handleReset}>Reset</Button>
-
-          <Button
-            onClick={(e) => {
-              handleAttempt(88, "hi");
-            }}
-          >
-            attempt
-          </Button>
         </>
       )}
     </>
