@@ -15,4 +15,5 @@
 .given {
   background-color: lightgray;
   cursor: default;
+  caret-color: transparent;
 }
