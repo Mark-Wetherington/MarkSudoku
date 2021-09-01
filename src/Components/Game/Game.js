@@ -17,7 +17,7 @@ const DIFFICULTY_RATING = {
 const Game = (props) => {
   const [solution, setSolution] = useState([]);
   const [difficulty, setDifficulty] = useState("");
-  const [puzzleJSX, setPuzzleJSX] = useState([]);
+  const [puzzle, setPuzzle] = useState([]);
   const [attempt, setAttempt] = useState([]);
 
   const handleSubmit = (event) => {
@@ -34,6 +34,7 @@ const Game = (props) => {
 
   const handleHint = () => {
     console.log(attempt);
+    handleAttempt(1, 23);
     let solutionAttempt = document.getElementsByName("sudoku-cell");
     for (let i = 0; i < solution.length; i++) {
       if (solutionAttempt[i].value !== solution[i].toString()) {
@@ -45,16 +46,13 @@ const Game = (props) => {
 
   const handleReset = (event) => {
     setDifficulty("");
-    setPuzzleJSX([]);
+    setPuzzle([]);
   };
 
   const handleAttempt = (idx, value) => {
-    console.log(idx, value);
-    console.log(attempt);
-    //let newAttempt = attempt;
-    //newAttempt[idx] = value;
-    //console.log(newAttempt);
-    //setAttempt(newAttempt);
+    let newAttempt = [...attempt];
+    newAttempt[idx] = value;
+    setAttempt(newAttempt);
   };
 
   useEffect(() => {
@@ -63,7 +61,6 @@ const Game = (props) => {
     }
     let candidatePuzzle = [];
     let candidateRating = 0;
-
     do {
       candidatePuzzle = makepuzzle();
       candidateRating = ratepuzzle(candidatePuzzle, 20);
@@ -71,36 +68,16 @@ const Game = (props) => {
 
     setAttempt(candidatePuzzle.map((x) => (x !== null ? x + 1 : null)));
     setSolution(solvepuzzle(candidatePuzzle).map((x) => x + 1));
-    setPuzzleJSX(BuildPuzzle(candidatePuzzle));
+    setPuzzle(candidatePuzzle);
   }, [difficulty]);
 
   const BuildPuzzle = (puzz) => {
     let JSXAccumulator = [];
     let puzzleRow = [];
     for (let i = 0; i < puzz.length; i++) {
-      let classes = ["cell"];
-      if (puzz[i] === null) {
-        puzzleRow.push(
-          <Cell
-            classList={classes}
-            value={""}
-            key={i}
-            index={i}
-            onAttempt={handleAttempt}
-          />
-        );
-      } else {
-        classes.push("given");
-        puzzleRow.push(
-          <Cell
-            classList={classes}
-            value={puzz[i] + 1}
-            key={i}
-            index={i}
-            onAttempt={handleAttempt}
-          />
-        );
-      }
+      puzzleRow.push(
+        <Cell key={i} idx={i} initialValue={puzz[i]} onChange={handleAttempt} />
+      );
       if (puzzleRow.length === 9) {
         JSXAccumulator.push(puzzleRow);
         puzzleRow = [];
@@ -117,7 +94,7 @@ const Game = (props) => {
           {
             <div className={styles.container}>
               <Card className={styles.board}>
-                {puzzleJSX.map((row, i) => (
+                {BuildPuzzle(puzzle).map((row, i) => (
                   <div key={`row-${i}`}>{row.map((cell) => cell)}</div>
                 ))}
               </Card>
@@ -126,6 +103,14 @@ const Game = (props) => {
           <Button onClick={handleSubmit}>Submit</Button>
           <Button onClick={handleHint}>Hint</Button>
           <Button onClick={handleReset}>Reset</Button>
+
+          <Button
+            onClick={(e) => {
+              handleAttempt(88, "hi");
+            }}
+          >
+            attempt
+          </Button>
         </>
       )}
     </>
