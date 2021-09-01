@@ -32,11 +32,11 @@ const Game = (props) => {
   };
 
   const handleHint = () => {
-    handleAttempt(1, 23);
     let solutionAttempt = document.getElementsByName("sudoku-cell");
     for (let i = 0; i < solution.length; i++) {
       if (solutionAttempt[i].value !== solution[i].toString()) {
         solutionAttempt[i].value = solution[i];
+        handleAttempt(i, solution[i]);
         return;
       }
     }
