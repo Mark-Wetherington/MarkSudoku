@@ -21,7 +21,6 @@ const Game = (props) => {
   const [attempt, setAttempt] = useState([]);
 
   const handleSubmit = (event) => {
-    console.log(attempt);
     let solutionAttempt = document.getElementsByName("sudoku-cell");
     for (let i = 0; i < solution.length; i++) {
       if (solution[i].toString() !== solutionAttempt[i].value) {
@@ -33,7 +32,6 @@ const Game = (props) => {
   };
 
   const handleHint = () => {
-    console.log(attempt);
     handleAttempt(1, 23);
     let solutionAttempt = document.getElementsByName("sudoku-cell");
     for (let i = 0; i < solution.length; i++) {
