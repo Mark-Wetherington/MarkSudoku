@@ -24,11 +24,11 @@ const Game = (props) => {
     let solutionAttempt = document.getElementsByName("sudoku-cell");
     for (let i = 0; i < solution.length; i++) {
       if (solution[i].toString() !== solutionAttempt[i].value) {
-        console.log("Incorrect solution");
+        alert("Incorrect solution");
         return;
       }
     }
-    console.log("Correct solution");
+    alert("Correct solution");
   };
 
   const handleHint = () => {
