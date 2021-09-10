@@ -9,7 +9,8 @@
 }
 
 .modal {
-  background-color: black;
-  color: red;
+  position: fixed;
+  background-color: white;
   z-index: 20;
+  padding: 5px;
 }

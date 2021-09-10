@@ -5,6 +5,7 @@ import DifficultySelector from "./DifficultySelector";
 import Cell from "./Cell";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
+import Modal from "../UI/Modal";
 
 import styles from "./Game.module.css";
 
@@ -19,6 +20,7 @@ const Game = (props) => {
   const [difficulty, setDifficulty] = useState("");
   const [puzzle, setPuzzle] = useState([]);
   const [attempt, setAttempt] = useState([]);
+  const [modalState, setModalState] = useState(null);
 
   const handleSubmit = (event) => {
     let solutionAttempt = document.getElementsByName("sudoku-cell");
@@ -42,9 +44,21 @@ const Game = (props) => {
     }
   };
 
-  const handleReset = (event) => {
+  const clearModal = () => {
+    setModalState(null);
+  };
+
+  const resetPuzzle = () => {
+    clearModal();
     setDifficulty("");
     setPuzzle([]);
+  };
+
+  const handleQuit = (event) => {
+    setModalState({
+      message: "Are you sure you want to quit?",
+      onConfirm: resetPuzzle,
+    });
   };
 
   const handleAttempt = (idx, value) => {
@@ -87,6 +101,13 @@ const Game = (props) => {
   return (
     <>
       {!difficulty && <DifficultySelector onDifficultySelect={setDifficulty} />}
+      {modalState && (
+        <Modal
+          message={modalState.message}
+          onConfirm={modalState.onConfirm}
+          onCancel={clearModal}
+        />
+      )}
       {difficulty && (
         <>
           {
@@ -100,7 +121,7 @@ const Game = (props) => {
           }
           <Button onClick={handleSubmit}>Submit</Button>
           <Button onClick={handleHint}>Hint</Button>
-          <Button onClick={handleReset}>Reset</Button>
+          <Button onClick={handleQuit}>Quit</Button>
         </>
       )}
     </>
