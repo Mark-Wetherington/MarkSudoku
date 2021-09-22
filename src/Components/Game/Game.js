@@ -23,9 +23,8 @@ const Game = (props) => {
   const [modalState, setModalState] = useState(null);
 
   const handleSubmit = (event) => {
-    let solutionAttempt = document.getElementsByName("sudoku-cell");
     for (let i = 0; i < solution.length; i++) {
-      if (solution[i].toString() !== solutionAttempt[i].value) {
+      if (solution[i] !== attempt[i]) {
         alert("Incorrect solution");
         return;
       }
@@ -34,10 +33,8 @@ const Game = (props) => {
   };
 
   const handleHint = () => {
-    let solutionAttempt = document.getElementsByName("sudoku-cell");
     for (let i = 0; i < solution.length; i++) {
-      if (solutionAttempt[i].value !== solution[i].toString()) {
-        solutionAttempt[i].value = solution[i];
+      if (attempt[i] !== solution[i]) {
         handleAttempt(i, solution[i]);
         return;
       }
@@ -87,8 +84,15 @@ const Game = (props) => {
     let JSXAccumulator = [];
     let puzzleRow = [];
     for (let i = 0; i < puzz.length; i++) {
+      let isGiven = puzz[i] !== null;
       puzzleRow.push(
-        <Cell key={i} idx={i} initialValue={puzz[i]} onChange={handleAttempt} />
+        <Cell
+          key={i}
+          idx={i}
+          value={attempt[i]}
+          onChange={handleAttempt}
+          isGiven={isGiven}
+        />
       );
       if (puzzleRow.length === 9) {
         JSXAccumulator.push(puzzleRow);
