@@ -15,6 +15,17 @@ const DIFFICULTY_RATING = {
   Hard: Infinity,
 };
 
+let shuffledIndeces = [];
+for (let i = 0; i < 81; i++) {
+  shuffledIndeces.push(i);
+}
+for (let i = 80; i >= 0; i--) {
+  let m = Math.floor(Math.random() * i);
+  let temp = shuffledIndeces[i];
+  shuffledIndeces[i] = shuffledIndeces[m];
+  shuffledIndeces[m] = temp;
+}
+
 const Game = (props) => {
   const [solution, setSolution] = useState([]);
   const [difficulty, setDifficulty] = useState("");
@@ -34,8 +45,8 @@ const Game = (props) => {
 
   const handleHint = () => {
     for (let i = 0; i < solution.length; i++) {
-      if (attempt[i] !== solution[i]) {
-        handleAttempt(i, solution[i]);
+      if (attempt[shuffledIndeces[i]] !== solution[shuffledIndeces[i]]) {
+        handleAttempt(shuffledIndeces[i], solution[shuffledIndeces[i]]);
         return;
       }
     }
