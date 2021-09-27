@@ -4,7 +4,6 @@ import Card from "./Card";
 import styles from "./Modal.module.css";
 
 const Popup = (props) => {
-  console.log(props.modalJSX);
   return <Card className={styles.modal}>{props.modalJSX}</Card>;
 };
 

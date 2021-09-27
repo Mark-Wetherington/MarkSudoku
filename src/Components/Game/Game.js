@@ -36,11 +36,17 @@ const Game = (props) => {
   const handleSubmit = (event) => {
     for (let i = 0; i < solution.length; i++) {
       if (solution[i] !== attempt[i]) {
-        alert("Incorrect solution");
+        setModalState({
+          message: "Incorrect solution.",
+          onConfirm: resetPuzzle,
+        });
         return;
       }
     }
-    alert("Correct solution");
+    setModalState({
+      message: "Correct solution!",
+      onConfirm: resetPuzzle,
+    });
   };
 
   const handleHint = () => {
@@ -65,7 +71,19 @@ const Game = (props) => {
   const handleQuit = (event) => {
     setModalState({
       message: "Are you sure you want to quit?",
-      onConfirm: resetPuzzle,
+      buttons: [
+        <Button key="modal-yes" onClick={resetPuzzle}>
+          Yes
+        </Button>,
+        <Button
+          key="modal-no"
+          onClick={() => {
+            setModalState(null);
+          }}
+        >
+          No
+        </Button>,
+      ],
     });
   };
 
@@ -119,8 +137,7 @@ const Game = (props) => {
       {modalState && (
         <Modal>
           <div>{modalState.message}</div>
-          <Button onClick={modalState.onConfirm}>Yes</Button>
-          <Button onClick={modalState.onCancel}>No</Button>
+          {modalState.buttons}
         </Modal>
       )}
       {difficulty && (
