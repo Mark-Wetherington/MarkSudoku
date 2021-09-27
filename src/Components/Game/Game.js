@@ -117,11 +117,11 @@ const Game = (props) => {
     <>
       {!difficulty && <DifficultySelector onDifficultySelect={setDifficulty} />}
       {modalState && (
-        <Modal
-          message={modalState.message}
-          onConfirm={modalState.onConfirm}
-          onCancel={clearModal}
-        />
+        <Modal>
+          <div>{modalState.message}</div>
+          <Button onClick={modalState.onConfirm}>Yes</Button>
+          <Button onClick={modalState.onCancel}>No</Button>
+        </Modal>
       )}
       {difficulty && (
         <>
