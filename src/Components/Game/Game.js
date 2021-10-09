@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
+import { useModal, Modal } from "../UI/Modal";
 
 import { makepuzzle, solvepuzzle, ratepuzzle } from "sudoku";
 import DifficultySelector from "./DifficultySelector";
 import Cell from "./Cell";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
-import Modal from "../UI/Modal";
+//import Modal from "../UI/Modal";
 
 import styles from "./Game.module.css";
 
@@ -32,21 +33,16 @@ const Game = (props) => {
   const [puzzle, setPuzzle] = useState([]);
   const [attempt, setAttempt] = useState([]);
   const [modalState, setModalState] = useState(null);
+  const { activeModal, setActiveModal } = useModal();
 
   const handleSubmit = (event) => {
     for (let i = 0; i < solution.length; i++) {
       if (solution[i] !== attempt[i]) {
-        setModalState({
-          message: "Incorrect solution.",
-          onConfirm: resetPuzzle,
-        });
+        setActiveModal("failure-modal");
         return;
       }
     }
-    setModalState({
-      message: "Correct solution!",
-      onConfirm: resetPuzzle,
-    });
+    setActiveModal("success-modal");
   };
 
   const handleHint = () => {
@@ -59,7 +55,7 @@ const Game = (props) => {
   };
 
   const clearModal = () => {
-    setModalState(null);
+    setActiveModal(null);
   };
 
   const resetPuzzle = () => {
@@ -69,22 +65,7 @@ const Game = (props) => {
   };
 
   const handleQuit = (event) => {
-    setModalState({
-      message: "Are you sure you want to quit?",
-      buttons: [
-        <Button key="modal-yes" onClick={resetPuzzle}>
-          Yes
-        </Button>,
-        <Button
-          key="modal-no"
-          onClick={() => {
-            setModalState(null);
-          }}
-        >
-          No
-        </Button>,
-      ],
-    });
+    setActiveModal("quit-modal");
   };
 
   const handleAttempt = (idx, value) => {
@@ -133,13 +114,20 @@ const Game = (props) => {
 
   return (
     <>
+      <Modal modalName="success-modal">
+        <div>Correct! You have succesfully completed the puzzle!</div>
+        <Button onClick={resetPuzzle}>Main Menu</Button>
+      </Modal>
+      <Modal modalName="failure-modal">
+        <div>Incorrect. Keep trying!</div>
+        <Button onClick={clearModal}>Okay</Button>
+      </Modal>
+      <Modal modalName="quit-modal">
+        <div>Are you sure you want to quit?</div>
+        <Button onClick={resetPuzzle}>Yes</Button>
+        <Button onClick={clearModal}>No</Button>
+      </Modal>
       {!difficulty && <DifficultySelector onDifficultySelect={setDifficulty} />}
-      {modalState && (
-        <Modal>
-          <div>{modalState.message}</div>
-          {modalState.buttons}
-        </Modal>
-      )}
       {difficulty && (
         <>
           {
