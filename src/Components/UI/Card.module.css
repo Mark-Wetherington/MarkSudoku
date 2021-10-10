@@ -1,4 +1,7 @@
 .card {
+  background-color: #a0a0a0;
+  border-color: #61d7d3;
   border-style: solid;
   border-radius: 10px;
+  border-width: 5px;
 }
