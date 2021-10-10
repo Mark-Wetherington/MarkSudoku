@@ -17,6 +17,8 @@
 .board {
   text-align: center;
   padding: 10px;
+  width: 498px;
+  height: 498px;
 }
 
 .board > div > :nth-child(1) {
