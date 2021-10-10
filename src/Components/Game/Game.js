@@ -115,7 +115,7 @@ const Game = (props) => {
   return (
     <>
       <Modal modalName="success-modal">
-        <div>Correct! You have succesfully completed the puzzle!</div>
+        <div>Correct! Great job!</div>
         <Button onClick={resetPuzzle}>Main Menu</Button>
       </Modal>
       <Modal modalName="failure-modal">
