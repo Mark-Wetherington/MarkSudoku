@@ -26,12 +26,10 @@ export const Modal = ({ modalName, children }) => {
         activeModal === modalName ? (
           <>
             {ReactDOM.createPortal(
-              <div className={styles.backdrop}></div>,
-              document.getElementById("backdrop-root")
-            )}
-            {ReactDOM.createPortal(
-              <Card className={styles.modal}>{children}</Card>,
-              document.getElementById("popup-root")
+              <div className={styles.backdrop}>
+                <Card className={styles.modal}>{children}</Card>
+              </div>,
+              document.getElementById("modal-root")
             )}
           </>
         ) : null

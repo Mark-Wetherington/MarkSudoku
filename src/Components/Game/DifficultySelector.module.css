@@ -1,6 +1,8 @@
 .difficulty {
-  margin: 15px auto;
-  width: 50%;
+  justify-content: center;
+  margin: 16px auto;
+  width: 498px;
+  height: 498px;
   text-align: center;
   border-width: 5px;
 }
@@ -23,8 +25,9 @@
 .easy,
 .medium,
 .hard {
-  padding: 10%;
-  margin: 5%;
+  display: flex;
+  padding: 8%;
+  margin: 5% auto;
   font-size: 30px;
   font-weight: 800;
 }

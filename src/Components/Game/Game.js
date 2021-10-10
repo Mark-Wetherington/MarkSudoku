@@ -130,18 +130,24 @@ const Game = (props) => {
       {!difficulty && <DifficultySelector onDifficultySelect={setDifficulty} />}
       {difficulty && (
         <>
-          {
-            <div className={styles.container}>
-              <Card className={styles.board}>
-                {BuildPuzzle(puzzle).map((row, i) => (
-                  <div key={`row-${i}`}>{row.map((cell) => cell)}</div>
-                ))}
-              </Card>
-            </div>
-          }
-          <Button onClick={handleSubmit}>Submit</Button>
-          <Button onClick={handleHint}>Hint</Button>
-          <Button onClick={handleQuit}>Quit</Button>
+          <div className={styles[`game-container`]}>
+            <Card className={styles.board}>
+              {BuildPuzzle(puzzle).map((row, i) => (
+                <div key={`row-${i}`}>{row.map((cell) => cell)}</div>
+              ))}
+            </Card>
+          </div>
+          <div className={styles[`btn-container`]}>
+            <Button className={styles[`game-btn`]} onClick={handleSubmit}>
+              Submit
+            </Button>
+            <Button className={styles[`game-btn`]} onClick={handleHint}>
+              Hint
+            </Button>
+            <Button className={styles[`game-btn`]} onClick={handleQuit}>
+              Quit
+            </Button>
+          </div>
         </>
       )}
     </>
