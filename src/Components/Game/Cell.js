@@ -21,7 +21,7 @@ const Cell = (props) => {
       min="1"
       max="9"
       step="1"
-      defaultValue={props.value}
+      value={props.value}
       readOnly={props.isGiven}
       className={classList.map((thisClass) => styles[`${thisClass}`]).join(" ")}
       autoComplete="off"

@@ -85,7 +85,7 @@ const Game = (props) => {
       candidateRating = ratepuzzle(candidatePuzzle, 20);
     } while (candidateRating >= DIFFICULTY_RATING[difficulty]);
 
-    setAttempt(candidatePuzzle.map((x) => (x !== null ? x + 1 : null)));
+    setAttempt(candidatePuzzle.map((x) => (x !== null ? x + 1 : "")));
     setSolution(solvepuzzle(candidatePuzzle).map((x) => x + 1));
     setPuzzle(candidatePuzzle);
   }, [difficulty]);
