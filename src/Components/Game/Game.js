@@ -6,7 +6,6 @@ import DifficultySelector from "./DifficultySelector";
 import Cell from "./Cell";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
-//import Modal from "../UI/Modal";
 
 import styles from "./Game.module.css";
 
