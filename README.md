@@ -1,1 +1,1 @@
-https://mark-wetherington.github.io/MarkSudoku/
+Try it out at https://mark-wetherington.github.io/MarkSudoku/
