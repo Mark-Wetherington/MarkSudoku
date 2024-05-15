@@ -28,10 +28,14 @@ const Cell = (props) => {
       onKeyDown={validateInput}
       onPaste={(e) => e.preventDefault()}
       onChange={(e) => {
-        if (e.target.value.length > 1) {
-          e.target.value = e.target.value % 10;
+        if (e.target.value.length == 0) {
+          props.onChange(props.idx, '');
+        } else {
+          if (e.target.value.length > 1) {
+            e.target.value = e.target.value % 10;
+          }
+          props.onChange(props.idx, Number(e.target.value));
         }
-        props.onChange(props.idx, Number(e.target.value));
       }}
     />
   );
